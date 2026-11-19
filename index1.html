@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Integrador - Boleta Cloud</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
+<body class="container" style="padding-top: 20px;">
+    <h2>Sistema Web de Boleta Escolar - CECyTEC 302</h2>
+    <p><small>Docente: Ing. Humberto G. Aguilera Esparza | Proyecto Integrador Cloud</small></p>
+    <hr>
+    
+    <section>
+        <form action="/guardar" method="POST">
+            <input type="text" name="nombre" required placeholder="Nombre Completo del Alumno">
+            <div class="grid">
+                <input type="number" step="0.1" min="0" max="10" name="p1" required placeholder="Parcial 1">
+                <input type="number" step="0.1" min="0" max="10" name="p2" required placeholder="Parcial 2">
+                <input type="number" step="0.1" min="0" max="10" name="p3" required placeholder="Parcial 3">
+            </div>
+            <button type="submit" style="background-color: #006341; border: none;">Registrar Calificaciones en la Nube</button>
+        </form>
+    </section>
+
+    <section style="margin-top: 30px;">
+        <h3>Boleta Digital Activa en Producción</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Alumno</th>
+                    <th>P1</th>
+                    <th>P2</th>
+                    <th>P3</th>
+                    <th>Promedio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in alumnos %}
+                <tr>
+                    <td><strong>{{ a.nombre }}</strong></td>
+                    <td>{{ a.p1 }}</td>
+                    <td>{{ a.p2 }}</td>
+                    <td>{{ a.p3 }}</td>
+                    <td><strong>{{ "%.1f"|format(a.promedio) }}</strong></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" style="text-align: center;">No hay registros en la base de datos cloud.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>
